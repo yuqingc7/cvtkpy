@@ -261,7 +261,7 @@ class SyncFile(VariantFile):
                     print(f"  {lineno} lines processed", end='\r')
                 self.nloci += 1
 
-        self.mat = np.stack(self.mat)
+        self.mat = np.stack(list(self.mat))
         self.chrom_names = set(self.chroms)
         self.chroms = np.string_(self.chroms)
         self.positions = np.array(self.positions)
@@ -307,7 +307,7 @@ class VCFFile(VariantFile):
         in that subpopulation.
         """
         counts_mat = self.geno_mat.count_alleles_subpops(sample_groups)
-        self.mat = np.stack(counts_mat.values())
+        self.mat = np.stack(list(counts_mat.values()))
         self.subpops = sample_groups.keys()
         return counts_mat
 
